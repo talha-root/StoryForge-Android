@@ -5,6 +5,7 @@ class ApiConstants {
   // Endpoints
   static const String login = '/api/auth/token';
   static const String register = '/api/auth/register';
+  static const String tokenRefresh = '/api/auth/token/refresh';
   static const String stories = '/api/stories';
   static const String storyDetail = '/api/stories/{id}';
   static const String storyWebSocket = '/ws/story/{id}/';

@@ -71,8 +71,16 @@ class WebSocketService {
   }
 
   void _handleConnectionClosed() {
+    final closeCode = _channel?.closeCode;
     _channel = null;
     _stopKeepAlive();
+    
+    // 4003 is 'Not a participant' or similar permission error on our backend
+    if (closeCode == 4003) {
+      _isManuallyClosed = true;
+      return;
+    }
+
     if (!_isManuallyClosed && _reconnectAttempts < _maxReconnectAttempts) {
       _scheduleReconnect();
     }
